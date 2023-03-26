@@ -12,15 +12,31 @@ class File {
     const fullPath = path.join(__dirname, filePath);
     const fileContent = await readFile(fullPath, 'utf8');
     const validation = this.isValid(fileContent);
-    if(!validation.valid) throw new Error(validation.error)
+    if (!validation.valid) throw new Error(validation.error);
   }
 
   static isValid(fileContent, options) {
     const [headers, ...contentRows] = fileContent.split(/\r?\n/);
-    if(contentRows.length === 0) return {
-      error: error.FILE_FIELDS_ERROR_MESSAGE,
-      valid: false
-    } 
+    if (contentRows.length === 0) {
+      return {
+        error: error.FILE_FIELDS_ERROR_MESSAGE,
+        valid: false
+      };
+    }
+
+    if (headers !== DEFAULT_OPTIONS.fields.join(',')) {
+      return {
+        error: error.FILE_FIELDS_ERROR_MESSAGE,
+        valid: false
+      };
+    }
+
+    if (contentRows.length > DEFAULT_OPTIONS.maxLine) {
+      return {
+        error: error.FILE_LENGTH_ERROR_MESSAGE,
+        valid: false
+      };
+    }
   }
 }
 
