@@ -23,4 +23,30 @@ const File = require('./file');
     const result = File.csvToJson(filePath);
     await assert.rejects(result, expectedResult);
   }
+
+  {
+    const expectedResult = [
+      {
+        id: '1',
+        name: 'Roni',
+        profession: 'developer',
+        age: '32'
+      },
+      {
+        id: '2',
+        name: 'Cesar',
+        profession: 'developer',
+        age: '32'
+      },
+      {
+        id: '3',
+        name: 'Maria',
+        profession: 'cook',
+        age: '43'
+      }
+    ];
+    const filePath = '../mocks/valid.csv';
+    const result = await File.csvToJson(filePath);
+    assert.deepEqual(result, expectedResult);
+  }
 })();

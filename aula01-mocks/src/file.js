@@ -10,13 +10,14 @@ const DEFAULT_OPTIONS = {
 class File {
   static async csvToJson(filePath) {
     const fullPath = path.join(__dirname, filePath);
-    const fileContent = await readFile(fullPath, 'utf8');
-    const validation = this.isValid(fileContent);
+    const csvContent = await readFile(fullPath, 'utf8');
+    const validation = this.isValid(csvContent);
     if (!validation.valid) throw new Error(validation.error);
+    return this.parseCSVToJSON(csvContent);
   }
 
-  static isValid(fileContent, options) {
-    const [headers, ...contentRows] = fileContent.split(/\r?\n/);
+  static isValid(csvContent) {
+    const [headers, ...contentRows] = csvContent.split(/\r?\n/);
     if (contentRows.length === 0) {
       return {
         error: error.FILE_FIELDS_ERROR_MESSAGE,
@@ -37,6 +38,27 @@ class File {
         valid: false
       };
     }
+
+    return {valid: true};
+  }
+
+  static parseCSVToJSON(csvContent) {
+    const lines = csvContent.split(/\r?\n/);
+    const firstLine = lines.shift();
+    const headers = firstLine.split(',');
+
+    const users = lines.map((line) => {
+      const columns = line.split(',');
+      const user = {};
+      for (let index in columns) {
+        const value = columns[index].trim();
+        const key = headers[index];
+        user[key] = value;
+      }
+      return user;
+    });
+
+    return users;
   }
 }
 
