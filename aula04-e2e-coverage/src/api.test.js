@@ -39,4 +39,11 @@ describe('API Suite test', () => {
       assert.equal(response.text, 'User credentials is invalid');
     });
   });
+
+  describe('/unknown:get', () => {
+    it('should request the /unknown route and return status 404', async () => {
+      const response = await supertest(app).get('/unknown').expect(404);
+      assert.equal(response.text, 'not found');
+    });
+  });
 });
