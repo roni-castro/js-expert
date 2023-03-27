@@ -13,9 +13,30 @@ describe('API Suite test', () => {
   });
 
   describe('/contact:get', () => {
-    it('should request the contact route and return 200', async () => {
+    it('should request the /contact route and return status 200', async () => {
       const response = await supertest(app).get('/contact').expect(200);
       assert.equal(response.text, 'contact us page');
+    });
+  });
+
+  describe('/login:post', () => {
+    it('should request the /login route and return status 200', async () => {
+      const response = await supertest(app)
+        .post('/login')
+        .send({username: 'roni', password: '123'})
+        .expect(200);
+      assert.equal(response.text, 'ok login');
+    });
+  });
+
+  describe('/login:post', () => {
+    it('should request the /login route with invalid data and return status 401', async () => {
+      const response = await supertest(app)
+        .post('/login')
+        .send({username: 'invalid', password: '123'})
+        .expect(401);
+      assert.ok(response.unauthorized);
+      assert.equal(response.text, 'User credentials is invalid');
     });
   });
 });
