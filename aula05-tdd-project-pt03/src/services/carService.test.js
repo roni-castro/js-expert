@@ -110,6 +110,8 @@ describe('CarService Test Suit', () => {
         numberOfDays: numberOfRentingDays
       });
 
+      // age: 20, tax: 1.1, categoryPrice: 37.6
+      // 37.6 * 1.1 = 41.36 * 5 days = 206.8
       const expectedAmount = carService.currencyFormat.format(206.8);
       const expected = new Transaction(customer, car, expectedAmount, dueDate);
       expect(result).to.be.deep.equal(expected);
