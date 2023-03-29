@@ -1,0 +1,25 @@
+{
+  "name": "aula03-spies",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "seed": "node ./seed",
+    "test:dev": "npx mocha -w ./src/*.test.js",
+    "test": "npx mocha ./src/*.test.js",
+    "test:cov": "npx nyc npx mocha ./src/*.test.js"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "keywords": [],
+  "author": "Roni Castro",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "sinon": "^15.0.1",
+    "supertest": "^6.3.3"
+  }
+}
