@@ -62,4 +62,25 @@ describe('CarService Test Suit', () => {
       expect(result).to.be.deep.equal(expected);
     });
   });
+
+  describe('given a carCategory, customer and numberOfDays', () => {
+    it('should calculate final amount', async () => {
+      const car = mocks.validCar;
+      const customer = {...mocks.validCustomer, age: 50};
+      const carCategory = {...mocks.validCarCategory, pricePerDay: 37.6};
+      const numberOfRentingDays = 5;
+      sandbox
+        .stub(carService, 'taxesBasedOnAge')
+        .returns([{from: 31, to: 100, then: 1.3}]);
+
+      const result = carService.calculateRentingPrice({
+        age: customer.age,
+        pricePerDay: carCategory.pricePerDay,
+        numberOfDays: numberOfRentingDays
+      });
+
+      const expected = 244.4;
+      expect(result).to.be.equal(expected);
+    });
+  });
 });
