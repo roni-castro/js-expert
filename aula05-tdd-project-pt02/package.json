@@ -6,8 +6,8 @@
   "scripts": {
     "seed": "node ./seed",
     "test:dev": "npx mocha -w ./src/**/*.test.js",
-    "test": "npx mocha /src/**/*.test.js",
-    "test:cov": "npx nyc npx mocha /src/**/*.test.js"
+    "test": "npx mocha ./src/**/*.test.js",
+    "test:cov": "npx nyc npx mocha ./src/**/*.test.js"
   },
   "engines": {
     "node": "18"
