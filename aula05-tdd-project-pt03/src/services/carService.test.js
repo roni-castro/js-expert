@@ -3,6 +3,7 @@ const {join} = require('path');
 const {expect} = require('chai');
 const sinon = require('sinon');
 const CarService = require('./carService');
+const Transaction = require('../../src/entities/transaction');
 
 const carsFile = join(__dirname, '../../databases', 'cars.json');
 const mocks = {
@@ -53,7 +54,7 @@ describe('CarService Test Suit', () => {
 
       sandbox
         .stub(carService.carRepository, carService.carRepository.find.name)
-        .resolves([car]);
+        .resolves(car);
 
       const result = await carService.getAvailableCar(carCategory);
       const expected = car;
@@ -67,7 +68,11 @@ describe('CarService Test Suit', () => {
     it('should calculate final amount', async () => {
       const car = mocks.validCar;
       const customer = {...mocks.validCustomer, age: 50};
-      const carCategory = {...mocks.validCarCategory, pricePerDay: 37.6};
+      const carCategory = {
+        ...mocks.validCarCategory,
+        carIds: [car.id],
+        pricePerDay: 37.6
+      };
       const numberOfRentingDays = 5;
       sandbox
         .stub(carService, 'taxesBasedOnAge')
@@ -78,9 +83,36 @@ describe('CarService Test Suit', () => {
         pricePerDay: carCategory.pricePerDay,
         numberOfDays: numberOfRentingDays
       });
-
       const expected = 244.4;
       expect(result).to.be.equal(expected);
+    });
+
+    it('should return a transaction receipt', async () => {
+      const car = mocks.validCar;
+      const customer = {...mocks.validCustomer, age: 20};
+      const carCategory = {
+        ...mocks.validCarCategory,
+        carIds: [car.id],
+        pricePerDay: 37.6
+      };
+      const numberOfRentingDays = 5;
+      const dueDate = '11 de novembro de 2020';
+
+      const now = new Date(2020, 10, 6);
+      sandbox.useFakeTimers(now);
+      sandbox
+        .stub(carService.carRepository, carService.carRepository.find.name)
+        .resolves(car);
+
+      const result = await carService.rent({
+        customer,
+        carCategory,
+        numberOfDays: numberOfRentingDays
+      });
+
+      const expectedAmount = carService.currencyFormat.format(206.8);
+      const expected = new Transaction(customer, car, expectedAmount, dueDate);
+      expect(result).to.be.deep.equal(expected);
     });
   });
 });

@@ -9,7 +9,7 @@ class BaseRepository {
     const items = JSON.parse(await readFile(this.file));
 
     if (!itemId) return items;
-    return items.filter((item) => item.id === itemId);
+    return items.find((item) => item.id === itemId);
   }
 }
 
