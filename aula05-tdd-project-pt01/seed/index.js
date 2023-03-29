@@ -23,11 +23,11 @@ const makeCar = ({available} = {available: faker.datatype.boolean()}) => {
   });
 };
 
-const makeCategory = ({cardIds} = {}) => {
+const makeCategory = ({carIds} = {}) => {
   return new CarCategory({
     id: faker.datatype.uuid(),
     name: faker.vehicle.type(),
-    cardIds: cardIds || [],
+    carIds: carIds || [],
     pricePerDay: Number(faker.finance.amount(20, 100))
   });
 };
@@ -39,7 +39,7 @@ const createSeeds = ({totalItems} = {totalItems: 2}) => {
   for (let i = 0; i < totalItems; i++) {
     const car = makeCar();
     cars.push(car);
-    carCategory.cardIds.push(car.id);
+    carCategory.carIds.push(car.id);
     const customer = makeCustomer();
     customers.push(customer);
   }

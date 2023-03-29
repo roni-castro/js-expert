@@ -1,9 +1,9 @@
 const Base = require('./base');
 
 class CarCategory extends Base {
-  constructor({id, name, cardIds, pricePerDay}) {
+  constructor({id, name, carIds, pricePerDay}) {
     super({id, name});
-    this.cardIds = cardIds;
+    this.carIds = carIds;
     this.pricePerDay = pricePerDay;
   }
 }
