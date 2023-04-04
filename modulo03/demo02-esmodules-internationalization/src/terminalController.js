@@ -1,18 +1,18 @@
 import Person from './person.js';
-import {getAll, save} from './repository.js';
 
 const TERMINAL_CLOSE_COMMAND = ':q';
 
 export default class TerminalController {
-  constructor({input, output}) {
+  constructor({input, output, database}) {
     this.input = input;
     this.output = output;
+    this.database = database;
   }
 
   async initialize(language) {
     while (true) {
       try {
-        const tableData = (await getAll()).map((person) =>
+        const tableData = (await this.database.getAll()).map((person) =>
           person.formatted(language)
         );
         this.output.printTable(tableData);
@@ -25,11 +25,11 @@ export default class TerminalController {
           return;
         }
         const person = Person.generateInstanceFromString(answer);
-        const newTableData = (await getAll()).map((person) =>
+        const newTableData = (await this.database.getAll()).map((person) =>
           person.formatted(language)
         );
         this.output.printTable(newTableData);
-        await save(person);
+        await this.database.add(person);
       } catch (error) {
         console.log(error);
       }
