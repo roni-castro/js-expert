@@ -10,10 +10,10 @@ export default class TerminalController {
   }
 
   async initialize() {
+    const tableData = await this.personsViewModel.getAll();
+    this.output.printTable(tableData);
     while (true) {
       try {
-        const tableData = await this.personsViewModel.getAll();
-        this.output.printTable(tableData);
         const answer = await this.input.question(
           'Enter data separated by space: '
         );

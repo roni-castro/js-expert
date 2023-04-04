@@ -24,6 +24,8 @@ export default class PersonsViewModel {
       await this.personsRepository.add(person);
       const personViewModel = this.formatter.format(person);
       this.personsViewModel.push(personViewModel);
+      return true;
     }
+    return false;
   }
 }
