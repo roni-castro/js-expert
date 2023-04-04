@@ -16,4 +16,23 @@ describe('Person Suit', () => {
 
     expect(result).to.be.deep.equal(expected);
   });
+
+  it('should format the person data correctly', () => {
+    const result = new Person({
+      id: 1,
+      vehicles: ['Motocicleta', 'Carro', 'Caminhão'],
+      kmTraveled: 1000,
+      from: '2009-01-01',
+      to: '2009-11-26'
+    }).formatted('pt-br');
+    const expected = {
+      from: '1 de janeiro de 2009',
+      id: 1,
+      kmTraveled: '1.000 km',
+      to: '26 de novembro de 2009',
+      vehicles: 'Motocicleta, Carro e Caminhão'
+    };
+
+    expect(result).to.be.deep.equal(expected);
+  });
 });
