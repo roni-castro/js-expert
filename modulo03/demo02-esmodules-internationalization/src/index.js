@@ -2,6 +2,8 @@ import readLine from 'readline';
 import chalk from 'chalk';
 import chalkTable from 'chalk-table';
 import DatabaseRepository from './repository.js';
+import PersonFormatter from './personFormatter.js';
+import PersonTableViewModel from './personsViewModel.js';
 import TerminalController from './terminalController.js';
 import TerminalInput from './terminalInput.js';
 import TerminalOutput from './terminalOutput.js';
@@ -15,6 +17,9 @@ const terminalController = new TerminalController({
     chalkTable,
     print: console.draft
   }),
-  database: new DatabaseRepository()
+  personsViewModel: new PersonTableViewModel({
+    formatter: new PersonFormatter(DEFAULT_LANGUAGE),
+    personsRepository: new DatabaseRepository()
+  })
 });
-await terminalController.initialize(DEFAULT_LANGUAGE);
+await terminalController.initialize();

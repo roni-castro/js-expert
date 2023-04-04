@@ -3,18 +3,16 @@ import Person from './person.js';
 const TERMINAL_CLOSE_COMMAND = ':q';
 
 export default class TerminalController {
-  constructor({input, output, database}) {
+  constructor({input, output, personsViewModel}) {
     this.input = input;
     this.output = output;
-    this.database = database;
+    this.personsViewModel = personsViewModel;
   }
 
-  async initialize(language) {
+  async initialize() {
     while (true) {
       try {
-        const tableData = (await this.database.getAll()).map((person) =>
-          person.formatted(language)
-        );
+        const tableData = await this.personsViewModel.getAll();
         this.output.printTable(tableData);
         const answer = await this.input.question(
           'Enter data separated by space: '
@@ -25,11 +23,9 @@ export default class TerminalController {
           return;
         }
         const person = Person.generateInstanceFromString(answer);
-        const newTableData = (await this.database.getAll()).map((person) =>
-          person.formatted(language)
-        );
+        await this.personsViewModel.add(person);
+        const newTableData = await this.personsViewModel.getAll();
         this.output.printTable(newTableData);
-        await this.database.add(person);
       } catch (error) {
         console.log(error);
       }
