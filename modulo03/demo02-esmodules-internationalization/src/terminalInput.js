@@ -2,7 +2,7 @@ import DraftLog from 'draftlog';
 
 class ITerminalInput {
   constructor() {}
-  question(prompt, callback) {}
+  question(prompt) {}
   close() {}
 }
 
@@ -22,12 +22,14 @@ export default class TerminalInput extends ITerminalInput {
   }
 
   question(question = '') {
+    super.question(question);
     return new Promise((resolve) => {
       this.terminal.question(question, resolve);
     });
   }
 
   closeTerminal() {
+    super.close();
     this.terminal.close();
   }
 }
