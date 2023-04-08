@@ -32,6 +32,13 @@ assert.deepStrictEqual(mapWithConstructor.get(true)(), 'boolean');
 assert.deepStrictEqual(map.size, 4);
 // - has
 assert.deepStrictEqual(map.has(1), true);
+// - keys
+assert.deepStrictEqual([...map.keys()], [1, '1', 'Roni', true]); // compatibility with Map
+// - values
+assert.deepStrictEqual(
+  JSON.stringify([...map.values()]),
+  JSON.stringify(['one', 'one string', {text: 'object'}, () => 'boolean'])
+);
 // - delete
 assert.deepStrictEqual(map.delete(1), true);
 assert.deepStrictEqual(map.delete('invalidKey'), false);
