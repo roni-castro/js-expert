@@ -3,10 +3,16 @@ find . -name "*.test.js" -not -path '*node_modules**' -not -path '*coverage**'
 find . -name "*.js" -not -path '*node_modules**' -not -path '*coverage**'
 
 npm i -g ipt
+
 find . -name "*.js" -not -path '*node_modules**' -not -path '*coverage**' | ipt
 find . -name "*.js" -not -path "*node_modules*" -not -path "*coverage*" \
-| while read file; do echo "'use strict';" \
-| cat - "$file" > temp && mv temp "$file"; \
+
+CONTENT="'use strict';"
+find . -name "*.js" -not -path "*node_modules*" -not -path "*coverage*" \
+| while read file; do
+    if ! head -n 1 "$file" | grep -q "^$CONTENT"; then
+        echo "$CONTENT" | cat - "$file" > temp && mv temp "$file"
+    fi
 done
 
 # with ipt
