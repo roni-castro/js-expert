@@ -1,3 +1,5 @@
+const {evaluateRegex} = require('./utils/safeRegex');
+
 class TextProcessorFluentAPI {
   #content;
   constructor(content) {
@@ -15,9 +17,18 @@ class TextProcessorFluentAPI {
     // another space instead of the person data.
     // (.*\n.*?)$ gets the person data we want including those with break lines, until
     // the end of line, as few as possible
-    const peopleDataRegex =
-      /(?<=[contratante|contratada]\:\s)(?!\s)(.*\n.*?)$/gim;
+    const peopleDataRegex = evaluateRegex(
+      /(?<=[contratante|contratada]\:\s)(?!\s)(.*\n.*?)$/gim
+    );
     this.#content = this.#content.match(peopleDataRegex);
+    return this;
+  }
+
+  divideTextInColumns() {
+    const separatorRegex = evaluateRegex(/,/);
+    this.#content = this.#content.map((personData) =>
+      personData.split(separatorRegex)
+    );
     return this;
   }
 }
