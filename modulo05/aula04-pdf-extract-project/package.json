@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "test:dev": "npx mocha --watch --parallel --recursive './src/**/*.test.js'",
-    "test": "npx mocha --parallel --recursive ./src/**/*.test.js",
-    "test:cov": "npx nyc npx mocha --parallel --recursive ./src/**/*.test.js"
+    "test": "npx mocha --parallel --recursive './src/**/*.test.js'",
+    "test:cov": "npx nyc npx mocha --parallel --recursive './src/**/*.test.js'"
   },
   "engines": {
     "node": "18"
