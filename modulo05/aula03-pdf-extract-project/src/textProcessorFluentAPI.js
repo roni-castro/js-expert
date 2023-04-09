@@ -26,8 +26,15 @@ class TextProcessorFluentAPI {
 
   divideTextInColumns() {
     const separatorRegex = evaluateRegex(/,/);
-    this.#content = this.#content.map((personData) =>
-      personData.split(separatorRegex)
+    this.#content = this.#content.map((line) => line.split(separatorRegex));
+    return this;
+  }
+
+  removeEmptyChars() {
+    const emptyCharsRegex = evaluateRegex(/^\s+|\s+$|\n/g);
+    console.log(this.#content);
+    this.#content = this.#content.map((line) =>
+      line.map((personDataItem) => personDataItem.replace(emptyCharsRegex, ''))
     );
     return this;
   }
