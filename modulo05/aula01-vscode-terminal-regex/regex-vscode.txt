@@ -1,0 +1,31 @@
+^\d{3}.\d{3}.\d{3}-\d{2}$
+
+607.262.570-36
+517.026.930-74
+911.134.890-90
+
+---
+
+Castro, Roni
+Gomes, Laila
+Jonhson, Jose
+
+find regex: ^(\w+),\s(\w+)$
+replace regex: {firstName: "$2", lastName: "$1"}
+
+---
+
+O [Erick Wendel](https://erickwendel.com) faz palestras e você devia segui-lo lá no [Twitter](http://twitter.com/erickwendel_) ou até no [Instagram](https://instagram.com/erickwendel_)
+
+[Instagram](brokenLink)
+
+Ah e pode pesquisar no [Google](https://google.com) ou 
+[Yahoo](https://yahoo.com)
+
+qualquer texto no meio!
+
+find regex: \[([\w\s]+)\]\(([http|https].*?)\) or \[(.*?)\]\(([http|https].*?)\)
+
+replace regex: <a href="$2">$1</a>
+
+---
