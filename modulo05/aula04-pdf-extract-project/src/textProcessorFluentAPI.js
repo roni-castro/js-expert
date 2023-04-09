@@ -1,5 +1,5 @@
 const {evaluateRegex} = require('./utils/safeRegex');
-
+const Person = require('./person');
 class TextProcessorFluentAPI {
   #content;
   constructor(content) {
@@ -35,6 +35,13 @@ class TextProcessorFluentAPI {
     this.#content = this.#content.map((line) =>
       line.map((personDataItem) => personDataItem.replace(emptyCharsRegex, ''))
     );
+    return this;
+  }
+
+  mapPerson() {
+    this.#content = this.#content.map((line) => {
+      return new Person(line);
+    });
     return this;
   }
 }

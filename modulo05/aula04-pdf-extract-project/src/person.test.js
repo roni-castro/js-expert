@@ -3,7 +3,7 @@ const {expect} = require('chai');
 const Person = require('./person');
 
 describe('Person Suit test', () => {
-  it('should generate a person instance rom properties list', () => {
+  it('should generate a person instance from properties list', () => {
     const content = [
       'Xuxa da Silva',
       'brasileira',

@@ -213,4 +213,35 @@ describe('TextProcessorFluentAPI Suit tests', () => {
 
     expect(result).to.be.deep.equal(expected);
   });
+
+  it('#mapPerson', () => {
+    const content = [
+      [
+        'Xuxa da Silva',
+        'brasileira',
+        'casada',
+        'CPF 235.743.420-12',
+        'residente e domiciliada a Rua dos bobos',
+        'zero',
+        'bairro Alphaville',
+        'São Paulo.'
+      ]
+    ];
+
+    const result = new TextProcessorFluentAPI(content).mapPerson().build();
+    const expected = [
+      {
+        nome: 'Xuxa da Silva',
+        nationality: 'Brasileira',
+        maritalStatus: 'Casada',
+        cpf: '23574342012',
+        address: 'Rua dos bobos',
+        number: 'zero',
+        neighborhood: 'Alphaville',
+        state: 'São Paulo'
+      }
+    ];
+
+    expect(result).to.be.deep.equal(expected);
+  });
 });
