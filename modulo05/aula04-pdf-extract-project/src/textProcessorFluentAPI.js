@@ -32,6 +32,7 @@ class TextProcessorFluentAPI {
 
   removeEmptyChars() {
     const emptyCharsRegex = evaluateRegex(/^\s+|\s+$|\n/g);
+    console.log(this.#content);
     this.#content = this.#content.map((line) =>
       line.map((personDataItem) => personDataItem.replace(emptyCharsRegex, ''))
     );
