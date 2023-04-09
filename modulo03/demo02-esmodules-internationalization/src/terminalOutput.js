@@ -1,3 +1,4 @@
+'use strict';
 class ITerminalOutput {
   constructor() {}
   printTable(tableData) {}

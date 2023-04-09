@@ -1,3 +1,4 @@
+'use strict';
 const BaseRepository = require('../repository/baseRepository');
 
 class CarService {

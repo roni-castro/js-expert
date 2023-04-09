@@ -1,3 +1,4 @@
+'use strict';
 import {writeFile, readFile} from 'fs/promises';
 import Person from './person.js';
 

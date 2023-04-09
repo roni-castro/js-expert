@@ -1,3 +1,4 @@
+'use strict';
 const Constants = {
   error: {
     FILE_LENGTH_ERROR_MESSAGE: 'The content length is invalid',

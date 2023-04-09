@@ -1,3 +1,4 @@
+'use strict';
 const assert = require('assert');
 const {createSandbox} = require('sinon');
 const Service = require('./service');

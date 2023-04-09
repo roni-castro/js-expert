@@ -1,3 +1,4 @@
+'use strict';
 /**
  * 0, current = 0, next = 1
  * 1, current = 1, next = 0 + 1 = 1

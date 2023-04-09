@@ -1,3 +1,4 @@
+'use strict';
 const Tax = require('../entities/tax');
 const Transaction = require('../entities/transaction');
 const BaseRepository = require('../repository/baseRepository');

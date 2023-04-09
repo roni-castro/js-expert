@@ -1,3 +1,4 @@
+'use strict';
 export default class Person {
   constructor({id, vehicles, kmTraveled, from, to}) {
     this.id = id;

@@ -1,3 +1,4 @@
+'use strict';
 import Person from './person.js';
 
 const TERMINAL_CLOSE_COMMAND = ':q';

@@ -1,3 +1,4 @@
+'use strict';
 export default class PersonsViewModel {
   constructor({formatter, personsRepository}) {
     this.formatter = formatter;

@@ -1,3 +1,4 @@
+'use strict';
 class Service {
   async makeRequest(url) {
     return fetch(url).then((res) => res.json());

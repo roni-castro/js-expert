@@ -1,3 +1,4 @@
+'use strict';
 const {deepStrictEqual} = require('assert');
 
 deepStrictEqual(true + 2, 3);

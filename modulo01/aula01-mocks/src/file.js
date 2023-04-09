@@ -1,3 +1,4 @@
+'use strict';
 const {readFile} = require('fs/promises');
 const path = require('path');
 const {error} = require('./constants');

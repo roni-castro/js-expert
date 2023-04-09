@@ -1,3 +1,4 @@
+'use strict';
 import sinon from 'sinon';
 import mocha from 'mocha';
 const {describe, it} = mocha;

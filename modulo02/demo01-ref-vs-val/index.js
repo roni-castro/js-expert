@@ -1,3 +1,4 @@
+'use strict';
 const {deepStrictEqual} = require('assert');
 
 let counter = 0;
