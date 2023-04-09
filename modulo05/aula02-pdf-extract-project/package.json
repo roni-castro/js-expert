@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "test:dev": "npx mocha -w ./src/**/*.test.js",
     "test": "npx mocha ./src/**/*.test.js",
     "test:cov": "npx nyc npx mocha ./src/**/*.test.js"
@@ -18,5 +19,8 @@
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0"
+  },
+  "dependencies": {
+    "pdf-parse": "^1.1.1"
   }
 }
