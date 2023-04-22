@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "server": "node src/ui/index.mjs",
-    "web": "npx http-server ."
+    "web": "npx http-server -c-1 -a localhost -p 8000 ./"
   },
   "keywords": [],
   "author": "",
