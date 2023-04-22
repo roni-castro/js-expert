@@ -17,10 +17,10 @@ describe('UserService', () => {
   describe('#find', () => {
     it('should call userRepository.find with query and return uppercase usernames', async () => {
       const query = {name: 'John Doe'};
-      const expectedResult = ['USER1', 'USER2'];
+      const expectedResult = [{name: 'USER1'}, {name: 'USER2'}];
       // Create a stub for the userRepository object
       const userRepository = {
-        find: sandbox.stub().resolves(['user1', 'user2'])
+        find: sandbox.stub().resolves([{name: 'user1'}, {name: 'user2'}])
       };
       const userService = new UserService({userRepository});
 

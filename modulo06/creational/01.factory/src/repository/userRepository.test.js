@@ -16,7 +16,7 @@ describe('UserRepository', () => {
   describe('#find', () => {
     it('should call dbConnection.find with query', async () => {
       const query = {name: 'John Doe'};
-      const expectedResult = ['user1', 'user2'];
+      const expectedResult = [{name: 'user1'}, {name: 'user2'}];
       // Create a stub for the dbConnection object
       const dbConnection = {
         find: sandbox.stub().resolves(expectedResult)
