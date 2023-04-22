@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node src",
     "test": "npx mocha ./src/*.test.js",
     "test:dev": "npx mocha --watch --parallel ./src/**/*.test.js"
   },
@@ -13,6 +14,7 @@
   "devDependencies": {
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
+    "rewiremock": "^3.14.5",
     "sinon": "^15.0.4"
   }
 }
