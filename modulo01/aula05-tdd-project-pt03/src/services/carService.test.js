@@ -5,13 +5,11 @@ const {expect} = require('chai');
 const sinon = require('sinon');
 const CarService = require('./carService');
 const Transaction = require('../../src/entities/transaction');
+const CarTestBuilder = require('../../test/carTestBuilder');
+const CarCategoryTestBuilder = require('../../test/carCategoryTestBuilder');
+const CustomerTestBuilder = require('../../test/customerTestBuilder');
 
 const carsFile = join(__dirname, '../../databases', 'cars.json');
-const mocks = {
-  validCar: require('../../mocks/validCar.json'),
-  validCarCategory: require('../../mocks/validCarCategory.json'),
-  validCustomer: require('../../mocks/validCustomer.json')
-};
 
 describe('CarService Test Suit', () => {
   let carService;
@@ -33,7 +31,7 @@ describe('CarService Test Suit', () => {
   });
 
   it('should choose randomly a car from the category chosen', () => {
-    const carCategory = mocks.validCarCategory;
+    const carCategory = CarCategoryTestBuilder.aCarCategory().build();
     const carIdIndex = 0;
 
     sandbox
@@ -41,7 +39,7 @@ describe('CarService Test Suit', () => {
       .returns(carIdIndex);
 
     const result = carService.chooseRandomCarId(carCategory);
-    const expected = mocks.validCarCategory.carIds[carIdIndex];
+    const expected = carCategory.carIds[carIdIndex];
 
     expect(carService.getRandomPositionFromArray.calledOnce).to.be.ok;
     expect(result).to.be.equal(expected);
@@ -49,8 +47,8 @@ describe('CarService Test Suit', () => {
 
   describe('when I check if there is a car available', () => {
     it('should choose randomly a car from the category chosen', async () => {
-      const car = mocks.validCar;
-      const carCategory = Object.create(mocks.validCarCategory);
+      const car = CarTestBuilder.aCar().build();
+      const carCategory = CarCategoryTestBuilder.aCarCategory().build();
       carCategory.carIds = [car.id];
 
       sandbox
@@ -67,13 +65,12 @@ describe('CarService Test Suit', () => {
 
   describe('given a carCategory, customer and numberOfDays', () => {
     it('should calculate final amount', async () => {
-      const car = mocks.validCar;
-      const customer = {...mocks.validCustomer, age: 50};
-      const carCategory = {
-        ...mocks.validCarCategory,
-        carIds: [car.id],
-        pricePerDay: 37.6
-      };
+      const car = CarTestBuilder.aCar().build();
+      const customer = CustomerTestBuilder.aCustomer().withAge(50).build();
+      const carCategory = CarCategoryTestBuilder.aCarCategory()
+        .withCarIds([car.id])
+        .withPricePerDay(37.6)
+        .build();
       const numberOfRentingDays = 5;
       sandbox
         .stub(carService, 'taxesBasedOnAge')
@@ -89,13 +86,12 @@ describe('CarService Test Suit', () => {
     });
 
     it('should return a transaction receipt', async () => {
-      const car = mocks.validCar;
-      const customer = {...mocks.validCustomer, age: 20};
-      const carCategory = {
-        ...mocks.validCarCategory,
-        carIds: [car.id],
-        pricePerDay: 37.6
-      };
+      const car = CarTestBuilder.aCar().build();
+      const customer = CustomerTestBuilder.aCustomer().withAge(20).build();
+      const carCategory = CarCategoryTestBuilder.aCarCategory()
+        .withCarIds([car.id])
+        .withPricePerDay(37.6)
+        .build();
       const numberOfRentingDays = 5;
       const dueDate = '11 de novembro de 2020';
 
