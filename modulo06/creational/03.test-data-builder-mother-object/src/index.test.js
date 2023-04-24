@@ -2,10 +2,11 @@ const {describe, it} = require('mocha');
 const {expect} = require('chai');
 const {productValidator} = require('.');
 const ProductDataBuilder = require('../test/model/productDataBuilder');
+const ProductMotherObject = require('../test/model/productMotherObject');
 
 describe('productValidator', () => {
   it('should not return errors with valid product', () => {
-    const product = ProductDataBuilder.aProduct().build();
+    const product = ProductMotherObject.valid();
     const result = productValidator(product);
     const expected = {
       valid: true,
@@ -16,7 +17,7 @@ describe('productValidator', () => {
   });
 
   it('should return errors when a product has an invalid id', () => {
-    const product = ProductDataBuilder.aProduct().withInvalidId().build();
+    const product = ProductMotherObject.withInvalidId();
     const result = productValidator(product);
     const expected = {
       valid: false,
@@ -29,7 +30,7 @@ describe('productValidator', () => {
   });
 
   it('should return errors when a product has an invalid name', () => {
-    const product = ProductDataBuilder.aProduct().withInvalidName().build();
+    const product = ProductMotherObject.withInvalidName();
     const result = productValidator(product);
     const expected = {
       valid: false,
@@ -42,7 +43,7 @@ describe('productValidator', () => {
   });
 
   it('should return errors when a product has an invalid price', () => {
-    const product = ProductDataBuilder.aProduct().withInvalidPrice().build();
+    const product = ProductMotherObject.withInvalidPrice();
     const result = productValidator(product);
     const expected = {
       valid: false,
@@ -55,7 +56,7 @@ describe('productValidator', () => {
   });
 
   it('should return errors when a product has an invalid category', () => {
-    const product = ProductDataBuilder.aProduct().withInvalidCategory().build();
+    const product = ProductMotherObject.withInvalidCategory();
     const result = productValidator(product);
     const expected = {
       valid: false,
