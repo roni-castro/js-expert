@@ -1,6 +1,6 @@
 'use strict';
 const assert = require('assert');
-const {error} = require('./constants');
+const { error } = require('./constants');
 const File = require('./file');
 
 (async () => {
@@ -14,6 +14,13 @@ const File = require('./file');
   {
     const expectedResult = new Error(error.FILE_FIELDS_ERROR_MESSAGE);
     const filePath = '../mocks/missing-header.csv';
+    const result = File.csvToJson(filePath);
+    await assert.rejects(result, expectedResult);
+  }
+
+  {
+    const expectedResult = new Error(error.FILE_FIELDS_ERROR_MESSAGE);
+    const filePath = '../mocks/empty-file-no-rows.csv';
     const result = File.csvToJson(filePath);
     await assert.rejects(result, expectedResult);
   }
