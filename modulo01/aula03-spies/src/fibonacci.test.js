@@ -9,11 +9,10 @@ const Fibonacci = require('./fibonacci');
     const fibonacciSpy = sinon.spy(fibonacci, fibonacci.execute.name);
 
     const sequenceToFind = 5;
-    for (sequence of fibonacci.execute(sequenceToFind)) {
-    }
+    for (const sequence of fibonacci.execute(sequenceToFind)) { }
 
     const expectedCallCount = sequenceToFind + 1;
-    assert.equal(fibonacciSpy.callCount, expectedCallCount);
+    assert.deepEqual(fibonacciSpy.callCount, expectedCallCount);
     assert.deepEqual(
       fibonacciSpy.getCall(1).args,
       [4, 1, 1],
@@ -43,8 +42,7 @@ const Fibonacci = require('./fibonacci');
 
   {
     const fibonacci = new Fibonacci();
-    const sequenceToFind = 6;
-    const result = [...fibonacci.execute(sequenceToFind)];
+    const result = [...fibonacci.execute(6)];
     assert.deepEqual(result, [0, 1, 1, 2, 3, 5]);
   }
 })();
