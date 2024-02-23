@@ -1,7 +1,8 @@
 'use strict';
 class Service {
   async makeRequest(url) {
-    return fetch(url).then((res) => res.json());
+    const response = await fetch(url);
+    return response.json();
   }
 
   async getPlanets(url) {

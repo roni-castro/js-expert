@@ -1,6 +1,6 @@
 'use strict';
 const assert = require('assert');
-const {createSandbox} = require('sinon');
+const { createSandbox } = require('sinon');
 const Service = require('./service');
 
 const planetsMocks = {
@@ -12,15 +12,17 @@ const BASE_PLANETS_URL_2 = 'https://swapi.dev/api/planets/2/';
 
 (async () => {
   const service = new Service();
-  const sinon = createSandbox();
-  const stub = sinon.stub(service, service.makeRequest.name);
-
-  stub.withArgs(BASE_PLANETS_URL_1).resolves(planetsMocks.tatooine);
-  stub.withArgs(BASE_PLANETS_URL_2).resolves(planetsMocks.alderaan);
+  const sandbox = createSandbox();
+  const stub = sandbox.stub(service, service.makeRequest.name);
+  stub
+    .withArgs(BASE_PLANETS_URL_1)
+    .resolves(planetsMocks.tatooine);
+  stub.withArgs(BASE_PLANETS_URL_2)
+    .resolves(planetsMocks.alderaan);
 
   {
     const result = await service.getPlanets(BASE_PLANETS_URL_1);
-    expectedResult = {
+    const expectedResult = {
       name: 'Tatooine',
       surfaceWater: '1',
       appearedIn: 5
@@ -30,7 +32,7 @@ const BASE_PLANETS_URL_2 = 'https://swapi.dev/api/planets/2/';
 
   {
     const result = await service.getPlanets(BASE_PLANETS_URL_2);
-    expectedResult = {
+    const expectedResult = {
       name: 'Alderaan',
       surfaceWater: '40',
       appearedIn: 2
