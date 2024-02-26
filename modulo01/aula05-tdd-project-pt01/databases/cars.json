@@ -1,4 +1,12 @@
 [
-  {"id": "f6e623ba-4e40-44e7-afb1-fcce8954e4ab"},
-  {"id": "75732b83-2ead-4ed6-b1de-826a5774e7d8"}
+  {
+    "id": "fcc3d4b2-f1e6-424c-869a-19b2b2c5aff0",
+    "name": "Alpine",
+    "available": true
+  },
+  {
+    "id": "a9a715be-f3a0-4d2c-8791-b0a1246e99f1",
+    "name": "El Camino",
+    "available": true
+  }
 ]

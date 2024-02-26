@@ -1,11 +1,11 @@
 [
   {
-    "id": "ec9edcc0-00c8-4c87-af2d-9d83af0534a5",
-    "name": "Coupe",
+    "id": "98e10e65-c2f7-4fef-b2d9-943dd4a6642f",
+    "name": "Sedan",
     "carIds": [
-      "f6e623ba-4e40-44e7-afb1-fcce8954e4ab",
-      "75732b83-2ead-4ed6-b1de-826a5774e7d8"
+      "fcc3d4b2-f1e6-424c-869a-19b2b2c5aff0",
+      "a9a715be-f3a0-4d2c-8791-b0a1246e99f1"
     ],
-    "pricePerDay": 33.87
+    "pricePerDay": 76.52
   }
 ]
