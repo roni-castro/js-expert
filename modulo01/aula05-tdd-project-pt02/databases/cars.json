@@ -1,4 +1,12 @@
 [
-  {"id": "f6e623ba-4e40-44e7-afb1-fcce8954e4ab"},
-  {"id": "75732b83-2ead-4ed6-b1de-826a5774e7d8"}
+  {
+    "id": "b0bd262b-02a3-4bd0-a2c5-eb3f7babfb4e",
+    "name": "Focus",
+    "available": false
+  },
+  {
+    "id": "46b436c2-dc07-46b8-9a44-cbdfa8652e42",
+    "name": "Model 3",
+    "available": false
+  }
 ]

@@ -1,9 +1,9 @@
 {
-  "id": "ec9edcc0-00c8-4c87-af2d-9d83af0534a5",
-  "name": "Coupe",
+  "id": "115f2265-d9f0-470e-a8b5-fb96706e9edd",
+  "name": "Crew Cab Pickup",
   "carIds": [
-    "f6e623ba-4e40-44e7-afb1-fcce8954e4ab",
-    "75732b83-2ead-4ed6-b1de-826a5774e7d8"
+    "b0bd262b-02a3-4bd0-a2c5-eb3f7babfb4e",
+    "46b436c2-dc07-46b8-9a44-cbdfa8652e42"
   ],
-  "pricePerDay": 33.87
+  "pricePerDay": 63.33
 }
