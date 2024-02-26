@@ -1,4 +1,4 @@
-const {once} = require('events');
+const { once } = require('events');
 const http = require('http');
 
 const DEFAULT_USER = {
@@ -8,33 +8,37 @@ const DEFAULT_USER = {
 
 const routes = {
   '/login:post': async (request, response) => {
-    const data = JSON.parse(await once(request, 'data'));
-    const toLower = (text) => text.toLowerCase();
-    if (
-      toLower(data.username) !== toLower(DEFAULT_USER.username) ||
-      data.password !== DEFAULT_USER.password
-    ) {
-      response.writeHead(401);
-      response.end('User credentials is invalid');
-      return;
+    const data = await once(request, 'data');
+    const body = JSON.parse(data);
+    if (!("username" in body) || !("password" in body)) {
+      response.writeHead(400);
+      return response.end('username and password are required');
     }
-    response.end('ok login');
+
+    const { username, password } = body;
+    const toLower = (data) => data.toLowerCase();
+    if (toLower(username) === toLower(DEFAULT_USER.username) && password === DEFAULT_USER.password) {
+      return response.end('login success');
+    } else {
+      response.writeHead(401);
+      return response.end('User credentials is invalid');
+    }
   },
   '/contact:get': (_request, response) => {
-    response.write('contact us page');
-    return response.end();
+    return response.end("contact us page");
   },
   default: (_request, response) => {
     response.writeHead(404);
-    return response.end('not found');
+    return response.end('Route not found');
   }
 };
 
 function handler(request, response) {
-  const {method, url} = request;
-  const routeKey = `${url.toLowerCase()}:${method.toLowerCase()}`;
-  const routeFound = routes[routeKey] || routes.default;
-  return routeFound(request, response);
+  const { url, method } = request;
+  const routeKey = `${url}:${method}`.toLowerCase();
+  const routeFn = routes[routeKey] || routes.default;
+
+  return routeFn(request, response);
 }
 
 const app = http.createServer(handler).listen(3000, () => {
