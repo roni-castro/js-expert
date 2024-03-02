@@ -1,11 +1,12 @@
 const Customer = require('../src/entities/customer');
 
 class CustomerTestBuilder {
+  #customer;
   constructor() {
-    this.customerData = {
-      id: '71523f24-e1e7-45e3-b0a2-1dbce8565bee',
-      name: 'Jerrold',
-      age: 34
+    this.#customer = {
+      id: "b6aa160f-ee8f-497f-831a-4681165af1f9",
+      name: "Dr. Clark Upton",
+      age: 41
     };
   }
 
@@ -14,13 +15,14 @@ class CustomerTestBuilder {
   }
 
   withAge(age) {
-    this.customerData.age = age;
+    this.#customer.age = age;
     return this;
   }
 
   build() {
-    return new Customer(this.customerData);
+    return new Customer(this.#customer);
   }
+
 }
 
 module.exports = CustomerTestBuilder;

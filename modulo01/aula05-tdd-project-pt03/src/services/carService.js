@@ -4,12 +4,12 @@ const Transaction = require('../entities/transaction');
 const BaseRepository = require('../repository/baseRepository');
 
 class CarService {
-  constructor({carsFile}) {
-    this.carRepository = new BaseRepository({file: carsFile});
+  constructor({ carsFile }) {
+    this.carRepository = new BaseRepository({ file: carsFile });
     this.taxesBasedOnAge = Tax.taxesBasedOnAge;
-    this.currencyFormat = new Intl.NumberFormat('pt-br', {
+    this.currencyFormatter = new Intl.NumberFormat('pt-br', {
       style: 'currency',
-      currency: 'BRL'
+      currency: 'BRL',
     });
   }
 
@@ -26,18 +26,19 @@ class CarService {
 
   async getAvailableCar(carCategory) {
     const cardId = this.chooseRandomCarId(carCategory);
-    const randomCar = await this.carRepository.find({itemId: cardId});
+    const randomCar = await this.carRepository.find({ itemId: cardId });
     return randomCar;
   }
 
-  calculateRentingPrice({age, pricePerDay, numberOfDays}) {
-    const {taxRate} = this.taxesBasedOnAge.find(
-      (item) => age >= item.from && age <= item.to
+  calculateRentingPrice({ age, pricePerDay, numberOfDays }) {
+    const { taxRate } = Tax.taxesBasedOnAge.find(
+      item => age >= item.from && age <= item.to
     );
-    return pricePerDay * taxRate * numberOfDays;
+    const finalPrice = ((pricePerDay * taxRate) * numberOfDays);
+    return finalPrice;
   }
 
-  async rent({customer, carCategory, numberOfDays}) {
+  async rent({ customer, carCategory, numberOfDays }) {
     const car = await this.getAvailableCar(carCategory);
     const total = this.calculateRentingPrice({
       age: customer.age,
@@ -51,9 +52,16 @@ class CarService {
       month: 'long',
       year: 'numeric'
     });
-    const totalFormatted = this.currencyFormat.format(total);
+    const totalFormatted = this.currencyFormatter.format(total);
 
-    return new Transaction(customer, car, totalFormatted, dueDateFormatted);
+    const transaction = new Transaction({
+      customer,
+      car,
+      total: totalFormatted,
+      dueDate: dueDateFormatted,
+    });
+
+    return transaction;
   }
 }
 

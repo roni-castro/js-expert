@@ -1,8 +1,13 @@
 const Car = require('../src/entities/car');
 
 class CarTestBuilder {
+  #car;
   constructor() {
-    this.carData = {id: 'f6e623ba-4e40-44e7-afb1-fcce8954e4ab', name: 'Focus'};
+    this.#car = {
+      id: "fb19fea8-3483-493e-9934-2c12bf327abc",
+      name: "Accord",
+      available: true
+    };
   }
 
   static aCar() {
@@ -10,18 +15,14 @@ class CarTestBuilder {
   }
 
   withId(id) {
-    this.carData.id = id;
-    return this;
-  }
-
-  withName(name) {
-    this.carData.name = name;
+    this.#car.id = id;
     return this;
   }
 
   build() {
-    return new Car(this.carData);
+    return new Car(this.#car);
   }
+
 }
 
 module.exports = CarTestBuilder;
