@@ -1,0 +1,9 @@
+{
+  "id": "b7deee5c-2e7f-4c36-8124-00e8ab41584d",
+  "name": "Minivan",
+  "carIds": [
+    "fb19fea8-3483-493e-9934-2c12bf327abc",
+    "13c40b93-cb12-4eca-b92f-8fcb3af88682"
+  ],
+  "pricePerDay": 82.44
+}
