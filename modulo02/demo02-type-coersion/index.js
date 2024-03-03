@@ -11,7 +11,7 @@ deepStrictEqual(2 > 1, true);
 deepStrictEqual(3 > 2 > 1, false);
 deepStrictEqual(3 > 2 >= 1, true);
 deepStrictEqual('21' - -1, 22);
-deepStrictEqual('21' + +1, '211');
+deepStrictEqual('21' + +1, "211");
 deepStrictEqual('1' == 1, true);
 deepStrictEqual('1' === 1, false);
 deepStrictEqual('B' + 'a' + +'a' + 'a', 'BaNaNa');
@@ -19,10 +19,10 @@ deepStrictEqual('B' + 'a' + +'a' + 'a', 'BaNaNa');
 // Conversion
 console.assert(String(123) === '123', 'explicit conversion to string');
 console.assert(123 + '' === '123', 'implicit conversion to string');
-console.assert(('hello' && 123) === 123, '& returns the last truthy value');
+console.assert(('hello' && 123) === 123, '&& returns the last truthy value');
 console.assert(
   ('hello' && '' && 123) === '',
-  '& returns the last value value or the last falsy value'
+  '&& returns the last value value or the last falsy value'
 );
 
 // valueOf, toString, toPrimitive
@@ -48,7 +48,7 @@ const item3 = {
     return `Name: ${this.name}, Age: ${this.age}`;
   },
   valueOf() {
-    return 007;
+    return 7;
   }
 };
 deepStrictEqual(item3 + 0, 7);
@@ -66,7 +66,7 @@ const item4 = {
 };
 deepStrictEqual(
   String(item4),
-  'Name: RoniCastro, Age: 32',
+  "Name: RoniCastro, Age: 32",
   'explict call toString'
 );
 
@@ -93,7 +93,7 @@ const item6 = {
     return `Name: ${this.name}, Age: ${this.age}`;
   },
   valueOf() {
-    return 007;
+    return 7;
   },
   [Symbol.toPrimitive](coercionType) {
     const types = {
@@ -119,7 +119,7 @@ deepStrictEqual(
   '{"name":"RoniCastro","age":32}0',
   'coerse to default, so is converted to string using toPrimitive'
 );
-deepStrictEqual(Number(item6), 7, 'coerse to number, using toPrimitive');
+deepStrictEqual(Number(item6), Number('0007'), 'coerse to number, using toPrimitive');
 deepStrictEqual(
   !!item6,
   true,
@@ -129,4 +129,5 @@ console.assert(item6 == String(item6), 'implicit + explicit coercion using ==');
 
 const item7 = {...item6, name: 'Zezin', age: 20};
 console.assert(item7.name == 'Zezin' && item7.age === 20);
+console.assert(item7[Symbol.toPrimitive], 'has toPrimitive method');
 console.log(item7);
