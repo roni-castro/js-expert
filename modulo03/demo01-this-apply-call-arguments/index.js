@@ -18,20 +18,24 @@ class File {
 
 const file = new File();
 // inherits the this from the watch
-// watch(__filename, file.watch);
+// watch(__filename, file.watch); // error, because this context is from the watch
+// watch(__filename, (event, filename) => file.watch(event, filename)); // success
 
 // pass custom context using call
 file.watch.call(
-  {showContent: () => console.log('call context')},
-  null,
-  __filename
+  {showContent: () => console.log('override showContent using call\n')},
+  null, // event param
+  __filename // filename param
 );
 
 // pass custom context using apply
-file.watch.apply({showContent: () => console.log('apply context')}, [
-  null,
-  __filename
-]);
+file.watch.apply(
+  {showContent: () => console.log('override showContent using apply\n')},
+  [
+    null, // event param
+  __filename // filename param
+  ]
+);
 
 // binds the this context inside watch to the file instance, and returns it
 watch(__filename, file.watch.bind(file));
