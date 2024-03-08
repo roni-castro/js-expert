@@ -23,7 +23,6 @@ export default class Person {
   formatted(language) {
     const toDate =(dateStr) => {
       const [year, month, day] = dateStr.split('-')
-      console.log(year, month, day)
       return new Date(year, month - 1, day)
     }
 
