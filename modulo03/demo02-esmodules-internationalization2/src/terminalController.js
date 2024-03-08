@@ -2,7 +2,6 @@ import chalk from 'chalk'
 import chalkTable from 'chalk-table'
 import readLine from 'readline'
 import DraftLog from 'draftlog'
-import Person from './person.js'
 
 class TablePrinter {
   constructor() {
@@ -51,15 +50,12 @@ class TerminalInputController {
 
 class TerminalController {
 
-  constructor({database = [], language = 'pt-BR', columns = [], endCommand = ':q'}) {
+  constructor({language = 'pt-BR', columns = [], endCommand = ':q'}) {
     this.terminalInput = new TerminalInputController()
     this.tablePrinter = new TablePrinter()
-    this.tableData = database.map(person => new Person(person).formatted(language))
     this.columns = columns
     this.language = language
     this.endCommand = endCommand
-
-    this.printTable()
   }
 
   async question(msg) {
@@ -70,14 +66,8 @@ class TerminalController {
     this.terminalInput.close()
   }
 
-  printTable() {
-    this.tablePrinter.print({tableData: this.tableData, columns: this.columns})
-  }
-
-  updateTable(item) {
-    const person = Person.generateInstanceFromString(item).formatted(this.language)
-    this.tableData.push(person)
-    this.printTable()
+  printTable(tableData) {
+    this.tablePrinter.print({tableData, columns: this.columns})
   }
 }
 
