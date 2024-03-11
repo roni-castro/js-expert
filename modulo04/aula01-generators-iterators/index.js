@@ -1,29 +1,30 @@
 'use strict';
 const assert = require('assert');
 
-function* multiply(a, b) {
-  yield a * b;
-}
-
-function* hello() {
-  yield 'Hello';
-  yield '-';
-  yield 'World';
-  yield* multiply(2, 4);
+function* multiply(x, y) {
+  yield x * y
 }
 
 const multiplyGenerator = multiply(2, 3);
 assert.deepStrictEqual(multiplyGenerator.next(), {value: 6, done: false});
+assert.deepStrictEqual(multiplyGenerator.next(), {value: undefined, done: true});
 
-const helloGenerator = hello();
-assert.deepStrictEqual(helloGenerator.next(), {value: 'Hello', done: false});
-assert.deepStrictEqual(helloGenerator.next(), {value: '-', done: false});
-assert.deepStrictEqual(helloGenerator.next(), {value: 'World', done: false});
-assert.deepStrictEqual(helloGenerator.next(), {value: 8, done: false});
-assert.deepStrictEqual(helloGenerator.next(), {value: undefined, done: true});
+function* hello() {
+  yield 'Hello'
+  yield '-'
+  yield 'World'
+  yield* multiply(2, 4)
+}
 
-assert.deepStrictEqual(Array.from(hello()), ['Hello', '-', 'World', 8]);
-assert.deepStrictEqual([...hello()], ['Hello', '-', 'World', 8]);
+const helloGenerator = hello()
+assert.deepStrictEqual(helloGenerator.next(), {value: 'Hello', done: false})
+assert.deepStrictEqual(helloGenerator.next(), {value: '-', done: false})
+assert.deepStrictEqual(helloGenerator.next(), {value: 'World', done: false})
+assert.deepStrictEqual(helloGenerator.next(), {value: 8, done: false})
+assert.deepStrictEqual(helloGenerator.next(), {value: undefined, done: true})
+
+assert.deepStrictEqual(Array.from(hello()), ['Hello', '-', 'World', 8])
+assert.deepStrictEqual([...hello()], ['Hello', '-', 'World', 8])
 
 // -- Async Iterators
 
@@ -34,23 +35,23 @@ function* promisify() {
   yield Promise.resolve('Hey Dude');
 }
 
-// Promise.all([...promisify()]).then((results) =>
+// Promise.all([...promisify()]).then((results) => {
 //   console.log(results.toString())
-// );
+// })
 
 async function* systemInfo() {
   const file = await readFile(__filename);
-  yield {file: file.toString()};
+  yield {file: file.toString()}
 
   const {size} = await stat(__filename);
-  yield {size};
+  yield {size}
 
   const dir = await readdir(__dirname);
-  yield {dir};
+  yield {dir}
 }
 
-(async function () {
-  for await (let item of systemInfo()) {
-    console.log("systemInfo: ", item);
+(async function() {
+  for await (let value of systemInfo()) {
+    console.log('systemInfo', {value})
   }
-})();
+})()
