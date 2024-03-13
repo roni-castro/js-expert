@@ -23,34 +23,36 @@ assert.deepStrictEqual(
 assert.deepStrictEqual(Object.getOwnPropertySymbols(user), [uniqueKey]);
 
 // byPass Symbol
-user[Symbol.for('password')] = 'password';
-assert.deepStrictEqual(user[Symbol.for('password')], 'password');
+user[Symbol.for('userName')] = 'password'
+assert.deepStrictEqual(user[Symbol.for('userName')], 'password');
 
 // Symbol iterator
 const objReverse = {
   [Symbol.iterator]: () => {
-    const items = [1, 2, 3];
+    const items = [1,2,3]
     return {
       next() {
         return {
           done: items.length === 0,
-          value: items.pop()
-        };
+          value: items.shift()
+        }
       }
-    };
+    }
   }
-};
-assert.deepStrictEqual([...objReverse], [3, 2, 1]);
+}
+
+assert.deepStrictEqual([...objReverse], [1,2,3]);
 
 const objReverseNoDone = {
   *[Symbol.iterator]() {
-    const items = [1, 2, 3];
-    while (items.length > 0) {
-      yield items.pop();
+    const items = [1,2,3]
+    while(items.length > 0) {
+      yield items.shift()
     }
   }
-};
-assert.deepStrictEqual([...objReverseNoDone], [3, 2, 1]);
+}
+
+assert.deepStrictEqual([...objReverseNoDone], [1,2,3]);
 
 // Symbol key
 const kItems = Symbol('kItems');
@@ -64,39 +66,45 @@ class MyDate {
   }
 
   [Symbol.toPrimitive](coercionType) {
-    if (coercionType !== 'string') throw new TypeError();
-    const items = this[kItems].map((item) =>
-      new Intl.DateTimeFormat('pt-BR', {
+    if(coercionType !== 'string') throw new TypeError();
+  
+    function formatDate(date) {
+      return new Intl.DateTimeFormat('pt-BR', {
         month: 'long',
         day: '2-digit',
         year: 'numeric'
-      }).format(item)
-    );
-    return new Intl.ListFormat('pt-BR', {
-      style: 'long',
-      type: 'conjunction'
-    }).format(items);
+      }).format(date)
+    }
+
+    function formaDates(dates) {
+      const datesFormatted = dates.map((item) => formatDate(item))
+      return new Intl.ListFormat('pt-BR', {
+        style: 'long',
+        type: 'conjunction'
+      }).format(datesFormatted)
+    }
+    return formaDates(this[kItems])
   }
 
   *[Symbol.iterator]() {
-    for (let item of this[kItems]) {
-      yield item;
+    for(let item of this[kItems]) {
+      yield item
     }
   }
 
   async *[Symbol.asyncIterator]() {
-    for (let item of this[kItems]) {
-      const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-      await timeout(100);
-      yield item.toISOString();
+    for(let item of this[kItems]) {
+      const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+      await timeout(100)
+      yield item.toISOString()
     }
   }
 }
-const myDate = new MyDate([2020, 03, 01], [2021, 02, 01], [2021, 01, 28]);
+const myDate = new MyDate([2020, 3, 1], [2021, 2, 1], [2021, 1, 28]);
 const expectedDates = [
-  new Date(2020, 03, 01),
-  new Date(2021, 02, 01),
-  new Date(2021, 01, 28)
+  new Date(2020, 3, 1),
+  new Date(2021, 2, 1),
+  new Date(2021, 1, 28)
 ];
 
 assert.deepStrictEqual(
