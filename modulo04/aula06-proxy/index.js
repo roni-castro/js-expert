@@ -11,19 +11,19 @@ const counter = {
   count: 0
 };
 const proxy = new Proxy(counter, {
-  set: function (target, propertyKey, newValue) {
-    event.emit(eventName, {newValue, key: target[propertyKey]});
-    target[propertyKey] = newValue;
-    return true;
+  set: function(target, propertyKey, newValue, _receiver) {
+    event.emit(eventName, {newValue, previousValue: target[propertyKey]});
+    target[propertyKey] = newValue
+    return true
   },
-  get: function (target, propertyKey, receiver) {
-    return target[propertyKey];
+  get: function(target, propertyKey, receiver) {
+    return target[propertyKey]
   }
 });
 
-proxy.count++; // set
-assert.deepStrictEqual(counter.count, 1); // get
-assert.deepStrictEqual(proxy.count, 1); // get
+proxy.count++; // get + set
+assert.deepStrictEqual(counter.count, 1); // get from counter
+assert.deepStrictEqual(proxy.count, 1); // get from Proxy
 
 setInterval(function () {
   if (proxy.count === 10) {
