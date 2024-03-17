@@ -1,9 +1,9 @@
 'use strict'
 const {evaluateRegex} = require('./utils/safeRegex');
 
-class Person {
+class Person {  
   constructor([
-    nome,
+    name,
     nationality,
     maritalStatus,
     cpf,
@@ -13,29 +13,38 @@ class Person {
     state
   ]) {
     function initialCap(str) {
-      const firstLetterExp = evaluateRegex(/^(\w{1})([a-zA-Z]+)$/);
-      return str.replace(
-        firstLetterExp,
-        (_fullMatch, group1, group2, _index) => {
-          return `${group1.toUpperCase()}${group2.toLowerCase()}`;
-        }
-      );
+      const firstLetterRegex = evaluateRegex(/^(\w{1})([a-zA-Z]+)$/)
+      return str.replace(firstLetterRegex, (_match, p1, p2) => {
+        return p1.toUpperCase() + p2.toLowerCase()
+      })
     }
-    this.nome = nome;
-    this.nationality = initialCap(nationality);
-    this.maritalStatus = initialCap(maritalStatus);
-    // remove any non digit for the string
-    this.cpf = cpf.replace(evaluateRegex(/[\D]+/g), '');
-    // get only the content after the letter ` a `
-    this.address = address.match(evaluateRegex(/(?<=\sa\s)([\w\s]+)/g)).join();
-    this.number = number;
-    // (?<=\w+\s) ignores any string with space before the neighborhood name
-    // ([\w\s]+) get the neighborhood name
-    this.neighborhood = neighborhood
-      .match(evaluateRegex(/(?<=\w+\s)([\w\s]+)/g))
-      .join();
-    // remove the . at the end of the string
-    this.state = state.replace(evaluateRegex(/\.$/), '');
+
+    function mapToNeighborhood(str) {
+      return str.match(/(?<=\w\s)([\w\s]+)/g).join()
+    }
+
+    function mapToAddress(str) {
+      return str.match(/(?<=\sa\s)([\w\s]+)/g).join()
+    }
+
+    function mapToState(str) {
+      return str.replace(/\.$/, '')
+    }
+
+    function mapToCpf(str) {
+      return str.replace(/(\D+)/g, '')
+    }
+
+    return {
+      name,
+      nationality: initialCap(nationality),
+      maritalStatus: initialCap(maritalStatus),
+      cpf: mapToCpf(cpf),
+      address: mapToAddress(address),
+      number,
+      neighborhood: mapToNeighborhood(neighborhood),
+      state: mapToState(state)
+    }
   }
 }
 

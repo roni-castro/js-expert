@@ -18,7 +18,7 @@ describe('Person Suit test', () => {
 
     const result = new Person(content);
     const expected = {
-      nome: 'Xuxa da Silva',
+      name: 'Xuxa da Silva',
       nationality: 'Brasileira',
       maritalStatus: 'Casada',
       cpf: '23574342012',

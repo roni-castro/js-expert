@@ -1,14 +1,15 @@
 'use strict'
-const {evaluateRegex} = require('./utils/safeRegex');
 const Person = require('./person');
+const {evaluateRegex} = require('./utils/safeRegex')
+
 class TextProcessorFluentAPI {
-  #content;
+  #content
   constructor(content) {
-    this.#content = content;
+    this.#content = content
   }
 
   build() {
-    return this.#content;
+    return this.#content
   }
 
   extractPeopleData() {
@@ -26,24 +27,22 @@ class TextProcessorFluentAPI {
   }
 
   divideTextInColumns() {
-    const separatorRegex = evaluateRegex(/,/);
-    this.#content = this.#content.map((line) => line.split(separatorRegex));
-    return this;
+    const separatorRegex = evaluateRegex(/,/)
+    this.#content = this.#content.map(line => line.split(separatorRegex))
+    return this
   }
 
   removeEmptyChars() {
-    const emptyCharsRegex = evaluateRegex(/^\s+|\s+$|\n/g);
-    this.#content = this.#content.map((line) =>
-      line.map((personDataItem) => personDataItem.replace(emptyCharsRegex, ''))
-    );
-    return this;
+    const emptyCharsRegex = evaluateRegex(/^\s+|\s+$|\n/g)
+    this.#content = this.#content.map(line => 
+      line.map(column => column.replace(emptyCharsRegex, ''))
+    )
+    return this
   }
 
-  mapPerson() {
-    this.#content = this.#content.map((line) => {
-      return new Person(line);
-    });
-    return this;
+  mapToPerson() {
+    this.#content = this.#content.map(personData => new Person(personData))
+    return this
   }
 }
 
