@@ -12,7 +12,7 @@ class TextProcessorFacade {
       .extractPeopleData()
       .divideTextInColumns()
       .removeEmptyChars()
-      .mapPerson()
+      .mapToPerson()
       .build();
   }
 }

@@ -12,7 +12,7 @@ describe('Person Suit test', () => {
       'CPF 235.743.420-12',
       'residente e domiciliada a Rua dos bobos',
       'zero',
-      'bairro Alphaville',
+      'bairro Consolação',
       'São Paulo.'
     ];
 
@@ -24,7 +24,7 @@ describe('Person Suit test', () => {
       cpf: '23574342012',
       address: 'Rua dos bobos',
       number: 'zero',
-      neighborhood: 'Alphaville',
+      neighborhood: 'Consolação',
       state: 'São Paulo'
     };
     expect(result).to.be.deep.equal(expected);

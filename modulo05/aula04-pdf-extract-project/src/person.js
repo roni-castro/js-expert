@@ -20,7 +20,7 @@ class Person {
     }
 
     function mapToNeighborhood(str) {
-      return str.match(/(?<=\w\s)([\w\s]+)/g).join()
+      return str.match(/(?<=\w\s).*$/g).join()
     }
 
     function mapToAddress(str) {
