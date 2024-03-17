@@ -34,17 +34,14 @@ class Person {
     function mapToCpf(str) {
       return str.replace(/(\D+)/g, '')
     }
-
-    return {
-      name,
-      nationality: initialCap(nationality),
-      maritalStatus: initialCap(maritalStatus),
-      cpf: mapToCpf(cpf),
-      address: mapToAddress(address),
-      number,
-      neighborhood: mapToNeighborhood(neighborhood),
-      state: mapToState(state)
-    }
+    this.name = name
+    this.nationality = initialCap(nationality),
+    this.maritalStatus = initialCap(maritalStatus),
+    this.cpf = mapToCpf(cpf),
+    this.address = mapToAddress(address),
+    this.number = number
+    this.neighborhood = mapToNeighborhood(neighborhood),
+    this.state = mapToState(state)
   }
 }
 
