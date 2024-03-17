@@ -1,3 +1,4 @@
+'use strict'
 const UserFactory = require('./factory/userFactory');
 
 (async () => {

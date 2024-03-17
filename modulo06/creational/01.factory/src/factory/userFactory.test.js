@@ -1,3 +1,4 @@
+'use strict'
 const {describe, it} = require('mocha');
 const {expect} = require('chai');
 const rewiremock = require('rewiremock/node');

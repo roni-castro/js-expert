@@ -1,3 +1,4 @@
+'use strict'
 class Database {
   constructor(connectionString) {
     this.connectionString = connectionString;

@@ -1,3 +1,4 @@
+'use strict'
 /*
 ProductId: should be between 2 and 20 characters
 Name: should be only words

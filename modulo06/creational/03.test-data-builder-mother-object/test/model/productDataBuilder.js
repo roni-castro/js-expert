@@ -1,3 +1,4 @@
+'use strict'
 const Product = require('../../src/entities/product');
 
 class ProductDataBuilder {

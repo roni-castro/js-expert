@@ -1,3 +1,4 @@
+'use strict'
 const Customer = require('../src/entities/customer');
 
 class CustomerTestBuilder {

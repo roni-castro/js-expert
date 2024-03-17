@@ -1,3 +1,4 @@
+'use strict'
 import chalk from 'chalk'
 import chalkTable from 'chalk-table'
 import readLine from 'readline'

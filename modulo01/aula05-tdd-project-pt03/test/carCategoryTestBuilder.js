@@ -1,3 +1,4 @@
+'use strict'
 const CarCategory = require('../src/entities/carCategory');
 const CarTestBuilder = require('./carTestBuilder');
 

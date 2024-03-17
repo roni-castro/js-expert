@@ -1,3 +1,4 @@
+'use strict'
 import PersonsViewModel from './personViewModel.js';
 import PersonRepository from './personRepository.js';
 import TerminalController from './terminalController.js';

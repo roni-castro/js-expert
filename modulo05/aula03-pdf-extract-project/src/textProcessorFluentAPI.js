@@ -1,3 +1,4 @@
+'use strict'
 const {evaluateRegex} = require('./utils/safeRegex');
 
 class TextProcessorFluentAPI {

@@ -1,3 +1,4 @@
+'use strict'
 class TextProcessorFluentAPI {
   #content;
   constructor(content) {

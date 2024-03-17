@@ -1,3 +1,4 @@
+'use strict'
 const TextProcessorFluentAPI = require('./textProcessorFluentAPI');
 
 class TextProcessorFacade {

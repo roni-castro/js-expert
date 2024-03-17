@@ -1,3 +1,4 @@
+'use strict'
 const UserRepository = require('../repository/userRepository');
 const UserService = require('../service/userService');
 const Database = require('../utils/database');
