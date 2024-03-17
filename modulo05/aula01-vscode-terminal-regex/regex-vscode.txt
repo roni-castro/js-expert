@@ -22,9 +22,9 @@ O [Erick Wendel](https://erickwendel.com) faz palestras e você devia segui-lo l
 Ah e pode pesquisar no [Google](https://google.com) ou 
 [Yahoo](https://yahoo.com)
 
-qualquer texto no meio!
+qualquer texto no meio!\[([\w\s]+)\]\((https?:\/\/.*?)\)
 
-find regex: \[([\w\s]+)\]\(([http|https].*?)\) or \[(.*?)\]\(([http|https].*?)\)
+find regex: \[([\w\s]+)\]\((https?:\/\/.*?)\) or \[(.*?)\]\((https?:\/\/.*?)\) or \[([\w\s]+)\]\(([http|https].*?)\) or \[(.*?)\]\(([http|https].*?)\)
 
 replace regex: <a href="$2">$1</a>
 
