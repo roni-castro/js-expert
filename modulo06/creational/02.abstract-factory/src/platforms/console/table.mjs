@@ -10,7 +10,6 @@ class TerminalOutput {
   }
 
   printTable(tableHeaders, tableData) {
-    console.log(tableData);
     this.print(this.chalkTable(this.getTableOptions(tableHeaders), tableData));
   }
 
@@ -41,7 +40,7 @@ export default class TableConsoleComponent extends TableComponent {
   prepareData(data) {
     const [firstRow] = data;
     const tableColumns = Object.keys(firstRow);
-    const tableData = Object.values(data);
+    const tableData = data;
 
     return {tableColumns, tableData};
   }
