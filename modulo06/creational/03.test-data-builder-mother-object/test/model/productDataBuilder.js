@@ -8,31 +8,51 @@ class ProductDataBuilder {
       name: 'computer',
       price: 1000,
       category: 'electronic'
-    };
+    }
   }
 
   static aProduct() {
-    return new ProductDataBuilder();
+    return new ProductDataBuilder()
+  }
+
+  withId(id) {
+    this.productData.id = id
+    return this
+  }
+
+  withName(name) {
+    this.productData.name = name
+    return this
+  }
+
+  withPrice(price) {
+    this.productData.price = price
+    return this
+  }
+
+  withCategory(category) {
+    this.productData.category = category
+    return this
   }
 
   withInvalidId() {
-    this.productData.id = '1';
-    return this;
+    this.productData.id = '0'
+    return this
   }
 
   withInvalidName() {
-    this.productData.name = '123name';
-    return this;
+    this.productData.name = '123name'
+    return this
   }
 
   withInvalidPrice() {
-    this.productData.price = 2000;
-    return this;
+    this.productData.price = 2000
+    return this
   }
 
   withInvalidCategory() {
-    this.productData.category = 'invalid-category';
-    return this;
+    this.productData.category = 'invalid-category'
+    return this
   }
 
   build() {

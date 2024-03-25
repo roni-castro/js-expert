@@ -11,15 +11,15 @@ class ProductMotherObject {
   }
 
   static withInvalidName() {
-    return ProductDataBuilder.aProduct().withInvalidName().build();
+    return ProductDataBuilder.aProduct().withInvalidName().build()
   }
 
   static withInvalidPrice() {
-    return ProductDataBuilder.aProduct().withInvalidPrice().build();
+    return ProductDataBuilder.aProduct().withInvalidPrice().build()
   }
-
+  
   static withInvalidCategory() {
-    return ProductDataBuilder.aProduct().withInvalidCategory().build();
+    return ProductDataBuilder.aProduct().withInvalidCategory().build()
   }
 }
 

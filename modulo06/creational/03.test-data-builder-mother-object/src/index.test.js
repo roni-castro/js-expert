@@ -5,7 +5,7 @@ const {productValidator} = require('.');
 const ProductDataBuilder = require('../test/model/productDataBuilder');
 const ProductMotherObject = require('../test/model/productMotherObject');
 
-describe('productValidator', () => {
+describe('productValidator using mother object example', () => {
   it('should not return errors with valid product', () => {
     const product = ProductMotherObject.valid();
     const result = productValidator(product);
@@ -23,7 +23,7 @@ describe('productValidator', () => {
     const expected = {
       valid: false,
       errors: [
-        'id: invalid length. id with value [1] should be between 2 and 20 characters'
+        `id: invalid length. id with value [${product.id}] should be between 2 and 20 characters`
       ]
     };
 
@@ -36,7 +36,7 @@ describe('productValidator', () => {
     const expected = {
       valid: false,
       errors: [
-        'name: invalid type. name with value [123name] should be only words'
+        `name: invalid type. name with value [${product.name}] should be only words`
       ]
     };
 
@@ -49,7 +49,7 @@ describe('productValidator', () => {
     const expected = {
       valid: false,
       errors: [
-        'price: invalid type. price with value [2000] should be from zero to a thousand'
+        `price: invalid type. price with value [${product.price}] should be from zero to a thousand`
       ]
     };
 
@@ -62,7 +62,7 @@ describe('productValidator', () => {
     const expected = {
       valid: false,
       errors: [
-        'category: invalid type. category with value [invalid-category] should be electronic or organic'
+        `category: invalid type. category with value [${product.category}] should be electronic or organic`
       ]
     };
 
@@ -78,8 +78,8 @@ describe('productValidator', () => {
     const expected = {
       valid: false,
       errors: [
-        'name: invalid type. name with value [123name] should be only words',
-        'category: invalid type. category with value [invalid-category] should be electronic or organic'
+        `name: invalid type. name with value [${product.name}] should be only words`,
+        `category: invalid type. category with value [${product.category}] should be electronic or organic`
       ]
     };
 
