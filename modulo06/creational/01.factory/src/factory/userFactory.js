@@ -5,12 +5,11 @@ const Database = require('../utils/database');
 
 class UserFactory {
   static async createInstance() {
-    const database = new Database('mongo://localhost');
+    const database = new Database('mongodb://localhost');
     const dbConnection = await database.connect();
     const userRepository = new UserRepository({dbConnection});
-    const userService = new UserService({userRepository});
-
-    return userService;
+    const userService  = new UserService({userRepository});
+    return userService
   }
 }
 

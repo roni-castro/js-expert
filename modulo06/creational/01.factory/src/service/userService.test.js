@@ -17,20 +17,23 @@ describe('UserService', () => {
 
   describe('#find', () => {
     it('should call userRepository.find with query and return uppercase usernames', async () => {
-      const query = {name: 'John Doe'};
-      const expectedResult = [{name: 'USER1'}, {name: 'USER2'}];
-      // Create a stub for the userRepository object
       const userRepository = {
-        find: sandbox.stub().resolves([{name: 'user1'}, {name: 'user2'}])
-      };
-      const userService = new UserService({userRepository});
+        find: sandbox.stub().resolves([
+          {name: 'user1'},
+          {name: 'user2'}
+        ])
+      }
+      const userService = new UserService({userRepository})
+      
+      const query = {name: 'user1'}
+      const result = await userService.find(query)
 
-      const result = await userService.find(query);
-
-      expect(result).to.deep.equal(expectedResult);
-      // Assert that userRepository.find was called with the query
-      expect(userRepository.find.calledOnce).to.be.true;
-      expect(userRepository.find.calledWith(query)).to.be.true;
+      expect(result).to.be.deep.equal([
+        {name: 'USER1'},
+        {name: 'USER2'}
+      ])
+      expect(userRepository.find.calledOnce).to.be.true
+      expect(userRepository.find.calledWith(query)).to.be.true
     });
   });
 });
